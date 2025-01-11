@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Webサイト制作ゴール</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="page7.css">
+  <script src="navigate.js" defer></script>
+</head>
+<body>
+  <div class="nav-buttons">
+    <button onclick="navigate('prev')">◁</button>
+    <button onclick="navigate('next')">▷</button>
+  </div>
+  <div class="container">
+    <div class="header">
+      <div class="header-svg">
+        <svg width="100%" height="150" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="0,0 0,150 300,0" fill="#9eff92" />
+        </svg>
+      </div>
+      <div class="header-content">
+        <span class="header-content-deco green"></span>
+        <h1 class="green">モデルケース（観光）</h1>
+      </div>
+    </div>
+    <div class="content">
+      <h2>Q. Webサイト制作で目指すべきゴールは？</h2>
+      <h2 id="answer"> 下記の表で一つだけ（求めたい数値だけ）空白にして計算ボタンを押してください。</h2>
+      <table class="table">
+        <tr>
+          <th>月収益</th>
+          <td><input type="text" name="monthly-income" oninput="formatCurrency(this)"><span>　円</span></td>
+        </tr>
+        <tr>
+          <th>1予約当たりの平均利益</th>
+          <td><input type="text" name="unit-income" oninput="formatCurrency(this)"><span>　円</span></td>
+        </tr>
+        <tr>
+          <th>アクセス数/月</th>
+          <td><input type="text" name="access" oninput="formatCurrency(this)"><span>　回</span></td>
+        </tr>
+        <tr>
+          <th>コンバージョン率<br>(CVR 成果/アクセス 1～5%の範囲)</th>
+          <td><input type="text" name="conversion-rate" oninput="formatCurrency(this)"><span>　%</span></td>
+        </tr>
+        <tr>
+          <th>開発費用</th>
+          <td>1,000,000　円</td>
+        </tr>
+        <tr>
+          <th>保守費用（月額）</th>
+          <td>10,000　円</td>
+        </tr>
+      </table>
+      <div class="button-container">
+        <button onclick="validateAndCalculate()">計算</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    function formatCurrency(input) {
+      // 全角数字を半角に変換
+      input.value = input.value.replace(/[０-９]/g, (s) => String.fromCharCode(s.charCodeAt(0) - 0xFEE0));
+      // カンマを取り除き、数値をチェック
+      const value = input.value.replace(/,/g, '');
+      if (!isNaN(value) && value !== '') {
+        input.value = Number(value).toLocaleString('ja-JP');
+      }
+    }
+
+    function validateAndCalculate() {
+      const inputs = document.querySelectorAll('input[type="text"]');
+      const values = [];
+      let emptyCount = 0;
+      let emptyFieldName = "";
+
+      inputs.forEach(input => {
+        const value = input.value.replace(/,/g, '').trim();
+        if (value === "") {
+          emptyCount++;
+          emptyFieldName = input.name;
+        }
+        values.push(value);
+      });
+
+      if (emptyCount !== 1) {
+        alert("一つだけ空白にしてください。");
+        return;
+      }
+
+      let resultMessage = "";
+      switch (emptyFieldName) {
+        case "monthly-income":
+          resultMessage = `想定月収益は ${(values[1] * values[2] * (values[3] / 100)).toLocaleString('ja-JP')} 円です。`;
+          break;
+        case "unit-income":
+          resultMessage = `1予約当たりに必要な平均利益は ${(values[0] / (values[2] * (values[3] / 100))).toLocaleString('ja-JP')} 円です。`;
+          break;
+        case "access":
+          resultMessage = `必要アクセス数は ${(values[0] / (values[1] * (values[3] / 100))).toLocaleString('ja-JP')} 回です。`;
+          break;
+        case "conversion-rate":
+          resultMessage = `必要コンバージョン率は ${((values[0] / (values[1] * values[2])) * 100).toFixed(2)} %です。`;
+          break;
+        default:
+          document.getElementById("answer").textContent = "不明なエラーが発生しました。";
+          return;
+      }
+
+      document.getElementById("answer").textContent = resultMessage;
+    }
+  </script>
+
+</body>
+</html>

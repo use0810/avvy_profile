@@ -1,0 +1,82 @@
+body, html{
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+}
+
+.nav-buttons {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 10px;
+  z-index: 20;
+}
+.nav-buttons button {
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 20px;
+  border: 1px solid gray;
+}
+
+.container {
+  width: 100%;
+  margin: 0px auto;
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
+.header {
+  position:relative;
+  height: 150px;
+  border-radius: 10px 10px 0 0;
+}
+
+.header-svg {
+  position: absolute;
+  z-index: 0;
+}
+
+.header-content {
+  position: absolute;
+  z-index: 10;
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.header-content-deco {
+  width: 30px;
+  height: 15px;
+  border-top: 2px solid white;
+  border-right: 2px solid white;
+  border-bottom: 2px solid white;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px; 
+}
+.header h1 {
+  width: 60vw;
+  margin: 0;
+  font-size: 18px;
+  color: white;
+  padding: 16px;
+  border: 2px solid white;
+  border-radius: 25px;
+}
+.green {
+  background-color: #00bf63;
+}
+.blue {
+  background-color: #008cff;
+}
+
+.yellow {
+  background-color: #ff914d;
+}
+
+
+.content {
+  margin: 20px 50px;
+}

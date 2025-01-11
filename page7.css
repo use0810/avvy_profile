@@ -1,0 +1,49 @@
+/*  モデルケースにおけるcssスタイル */
+.content h2 {
+  font-size: 16px;
+  color: #333333;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+.table th, .table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+.table th {
+  background-color: #f9f9f9;
+  font-weight: bold;
+  width: 50%;
+}
+
+.table td {
+  text-align: right;
+}
+
+input {
+  text-align: right;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.button-container button {
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.5s;
+  padding: 10px 20px;
+  border: 2px solid green;
+  background-color: white;
+	color: green;
+  border-radius: 20px;
+}
+
+.button-container button:hover {
+  color: #fff;
+	background: green;
+}
